@@ -110,6 +110,8 @@ This list prioritizes resources that move 3D assets closer to actual simulator u
 
 Pure visual 3D generation is usually out of scope unless it is a useful building block for sim-ready asset generation.
 
+Real2Sim work is included only when it produces reusable object-level assets, physical parameters, simulator-facing descriptions, or direct sim-vs-real validation evidence. Scene reconstruction or policy-transfer-only work is out of scope.
+
 <a id="must-read"></a>
 
 ## 🔥 Must Read First
@@ -179,6 +181,16 @@ See also: [docs/reading-path.md](docs/reading-path.md).
   Links: [project](https://3dlg-hcvc.github.io/singapo/)
   *Why engineers care:* good contrast to URDF-first methods; emphasizes part graph generation.
 
+- **[2025] DIPO — Dual-State Images Controlled Articulated Object Generation Powered by Diverse Data** `[G][A][F]` 🌐🛠️📦
+  Dual-state image pair → articulated 3D object with part layouts and joint parameters; introduces PM-X with URDF annotations.
+  Links: [project](https://rq-wu.github.io/projects/DIPO/) · [paper](https://arxiv.org/abs/2505.20460)
+  *Why engineers care:* dual-state conditioning reduces articulation ambiguity compared with single-image-only pipelines.
+
+- **[2025] ArtFormer — Controllable Generation of Diverse 3D Articulated Objects** `[G][A]` 🛠️
+  Controllable articulated object generation with part-aware geometry representations.
+  Links: [paper](https://openaccess.thecvf.com/content/CVPR2025/html/Su_ArtFormer_Controllable_Generation_of_Diverse_3D_Articulated_Objects_CVPR_2025_paper.html) · [code](https://github.com/ShuYuMo2003/ArtFormer)
+  *Why engineers care:* useful reference for controllable part-level generation before simulator lowering.
+
 - **[2025] DreamArt — Generating Interactable Articulated Objects from a Single Image** `[G][A][V]` 🧪
   Single image → high-fidelity interactable articulated object.
   Links: [paper](https://arxiv.org/abs/2507.05763)
@@ -209,6 +221,16 @@ See also: [docs/reading-path.md](docs/reading-path.md).
   3D asset generation and annotation with physical grounding: scale, material, affordance, kinematics, function.
   Links: [project](https://physx-3d.github.io/)
   *Why engineers care:* shifts asset generation from appearance toward physically meaningful metadata.
+
+- ⭐ **[2025] Scalable Real2Sim — Physics-Aware Asset Generation via Robotic Pick-and-Place Setups** `[G][P][F][V]` 🌐🛠️📦🤖
+  Robotic interaction pipeline → visual geometry, collision geometry, inertial parameters, and simulatable object descriptions for real-world objects.
+  Links: [project](https://scalable-real2sim.github.io/) · [paper](https://arxiv.org/abs/2503.00370) · [code](https://github.com/nepfaff/scalable-real2sim) · [data](https://huggingface.co/datasets/nepfaff/scalable-real2sim)
+  *Why engineers care:* demonstrates a scalable real-world data-collection loop for turning physical objects into simulation-ready assets with measured dynamics.
+
+- **[2026] Real-to-Sim Robot Policy Evaluation with Gaussian Splatting Simulation of Soft-Body Interactions** `[G][P][V]` 🌐🛠️📦🤖
+  Real-world videos → Gaussian Splatting visual simulation and soft-body digital twins for closed-loop policy evaluation.
+  Links: [project](https://real2sim-eval.github.io/) · [paper](https://arxiv.org/abs/2511.04665) · [code](https://github.com/kywind/real2sim-eval) · [data](https://huggingface.co/collections/shashuo0104/real-to-sim-policy-eval)
+  *Why engineers care:* adds a validation-oriented Real2Sim example where reconstructed simulation correlates with real policy rollouts, especially for deformable interactions.
 
 <a id="sophy"></a>
 

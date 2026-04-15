@@ -1,0 +1,63 @@
+name: Resource request
+description: Suggest a paper, project, dataset, benchmark, or tool for the list.
+title: "[Resource]: "
+labels: [resource-request]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a resource. Please focus on resources that help generate, convert, package, or validate simulation-ready 3D assets.
+  - type: input
+    id: title
+    attributes:
+      label: Resource title
+      placeholder: PhysX-Anything
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Primary URL
+      placeholder: https://...
+    validations:
+      required: true
+  - type: dropdown
+    id: type
+    attributes:
+      label: Resource type
+      multiple: true
+      options:
+        - Paper
+        - Project page
+        - Code
+        - Dataset / assets
+        - Benchmark / evaluation
+        - Tooling / pipeline
+    validations:
+      required: true
+  - type: checkboxes
+    id: capabilities
+    attributes:
+      label: Capability tags
+      description: Select every sim-ready dimension this resource directly addresses.
+      options:
+        - label: "[G] Geometry"
+        - label: "[A] Articulation"
+        - label: "[P] Physical properties"
+        - label: "[F] Simulator format"
+        - label: "[V] Validation"
+  - type: textarea
+    id: why
+    attributes:
+      label: Why engineers care
+      description: Explain the concrete utility for sim-ready asset generation.
+      placeholder: This method turns a static mesh into articulated URDF assets...
+    validations:
+      required: true
+  - type: textarea
+    id: caveats
+    attributes:
+      label: Known caveats
+      description: Mention missing code/data, weak validation, license concerns, or scope limits.
+    validations:
+      required: false

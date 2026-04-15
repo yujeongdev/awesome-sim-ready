@@ -1,0 +1,32 @@
+name: Correction
+description: Fix a broken link, metadata issue, or inaccurate description.
+title: "[Correction]: "
+labels: [correction]
+body:
+  - type: input
+    id: entry
+    attributes:
+      label: Entry name
+      placeholder: PhysX-Anything
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong?
+      placeholder: The project link is stale, the tag should include [F], etc.
+    validations:
+      required: true
+  - type: textarea
+    id: fix
+    attributes:
+      label: Suggested fix
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source URL
+      placeholder: https://...
+    validations:
+      required: false

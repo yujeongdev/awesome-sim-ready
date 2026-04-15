@@ -24,6 +24,7 @@
 | 🎯 | [Aim of the Project](#aim) | Why this is not another visual 3D paper dump |
 | 🧠 | [What is a Sim-Ready Asset?](#definition) | What must exist beyond a pretty mesh |
 | 🏷️ | [Legend](#legend) | How to read availability and capability tags |
+| 🎚️ | [Selection Criteria](#selection-criteria) | What belongs here and what does not |
 | 🔥 | [Must Read First](#must-read) | A practical reading order |
 | 🧰 | [End-to-End Sim-Ready Asset Generation](#end-to-end) | Image/text/mesh → simulator-facing asset |
 | 🦾 | [Articulated Object Generation and Reconstruction](#articulation) | Parts, joints, axes, limits, kinematic graphs |
@@ -94,6 +95,20 @@ Capability tags:
 Why bracket tags instead of emojis here? Availability is human-facing, so emojis work well. Capability tags are intended to be stable, grep-friendly, table-friendly, and easy to migrate into `resources.yml` later. They also avoid ambiguity across platforms where emoji rendering/search can be inconsistent.
 
 Ordering policy: representative and runnable work appears first within a section; newer additions can be added chronologically after the core items.
+
+<a id="selection-criteria"></a>
+
+## 🎚️ Selection Criteria
+
+This list prioritizes resources that move 3D assets closer to actual simulator use. A strong entry should cover at least one of:
+
+- explicit geometry or part-level output,
+- articulation / kinematic structure,
+- physical or material grounding,
+- simulator-facing formats,
+- validation evidence beyond a rendered demo.
+
+Pure visual 3D generation is usually out of scope unless it is a useful building block for sim-ready asset generation.
 
 <a id="must-read"></a>
 

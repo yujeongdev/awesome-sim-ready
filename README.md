@@ -15,7 +15,7 @@
 
 ## 🚩 News & Updates
 
-- **2026-04** — Initial MVP structure: definition, reading path, resource taxonomy, validation checklist, and simulator-format guide.
+- **2026-04** — Initial MVP structure: definition, reading path, resource taxonomy, and validation checklist.
 
 ## 📋 Contents
 
@@ -99,14 +99,14 @@ Ordering policy: representative and runnable work appears first within a section
 
 ## 🔥 Must Read First
 
-1. **SAPIEN / PartNet-Mobility** — understand the articulated-object dataset and simulator substrate.
-2. **URDFormer** — early real-image → URDF digital twin pipeline.
-3. **Real2Code** — articulation as executable code generation.
-4. **Articulate-Anything** — VLM agent loop for generating articulated URDF assets.
-5. **PhysX-3D** — physics-grounded asset properties and annotations.
-6. **PhysX-Anything** — single-image simulation-ready physical asset pipeline.
-7. **SIMART** — sparse 3D-token MLLM for decomposing monolithic meshes into sim-ready articulated assets.
-8. **DSO / SOPHY / PhysDreamer** — physical plausibility, material, and dynamics directions.
+1. **[SAPIEN / PartNet-Mobility](#sapien-partnet-mobility)** — understand the articulated-object dataset and simulator substrate.
+2. **[URDFormer](#urdformer)** — early real-image → URDF digital twin pipeline.
+3. **[Real2Code](#real2code)** — articulation as executable code generation.
+4. **[Articulate-Anything](#articulate-anything)** — VLM agent loop for generating articulated URDF assets.
+5. **[PhysX-3D](#physx-3d)** — physics-grounded asset properties and annotations.
+6. **[PhysX-Anything](#physx-anything)** — single-image simulation-ready physical asset pipeline.
+7. **[SIMART](#simart)** — sparse 3D-token MLLM for decomposing monolithic meshes into sim-ready articulated assets.
+8. **[DSO](#dso) / [SOPHY](#sophy) / [PhysDreamer](#physdreamer)** — physical plausibility, material, and dynamics directions.
 
 See also: [docs/reading-path.md](docs/reading-path.md).
 
@@ -114,11 +114,15 @@ See also: [docs/reading-path.md](docs/reading-path.md).
 
 ## 🧰 End-to-End Sim-Ready Asset Generation
 
+<a id="physx-anything"></a>
+
 - ⭐ **[2025] PhysX-Anything — Simulation-Ready Physical 3D Assets from Single Image** `[G][A][P][F]` 🌐🛠️📦🤖
   Single image → part-aware physical asset with simulator-facing outputs.
   Links: [paper](https://arxiv.org/abs/2511.13648) · [code](https://github.com/ziangcao0312/PhysX-Anything)
   *Why engineers care:* anchor project for image-to-sim-ready asset generation; good case study for VLM reasoning + coarse geometry + decoder + URDF/XML lowering.
   *Caveat:* still needs per-asset physics QA; generated physical parameters should not be trusted blindly.
+
+<a id="simart"></a>
 
 - ⭐ **[2026] SIMART — Decomposing Monolithic Meshes into Sim-ready Articulated Assets via MLLM** `[G][A][F]` 🌐
   Static/generated monolithic mesh → segmented articulated asset with URDF-style metadata.
@@ -134,15 +138,21 @@ See also: [docs/reading-path.md](docs/reading-path.md).
 
 ## 🦾 Articulated Object Generation and Reconstruction
 
+<a id="articulate-anything"></a>
+
 - ⭐ **[2025] Articulate-Anything — Automatic Generation of 3D Interactable Assets** `[G][A][F][V]` 🌐🛠️
   Text/image/video/PartNet asset → Python programs that compile to URDF.
   Links: [project](https://articulate-anything.github.io/) · [code](https://github.com/vlongle/articulate-anything)
   *Why engineers care:* frames asset generation as an agentic loop with code generation, compilation, and self-correction.
 
+<a id="real2code"></a>
+
 - ⭐ **[2025] Real2Code — Reconstruct Articulated Objects via Code Generation** `[G][A][F]` 🌐
   Visual observations → executable code descriptions for articulated objects.
   Links: [project](https://real2code.github.io/)
   *Why engineers care:* shows how LLM/code representations can carry articulation structure better than raw continuous predictions alone.
+
+<a id="urdformer"></a>
 
 - **[2023/2024] URDFormer — Constructing Articulated Simulation Environments from Real-World Images** `[G][A][F]` 🌐🛠️
   Real-world image → interactive digital twin in URDF.
@@ -178,15 +188,21 @@ See also: [docs/reading-path.md](docs/reading-path.md).
 
 ## 🧪 Physics, Materials, and Dynamics Grounding
 
+<a id="physx-3d"></a>
+
 - ⭐ **[2025] PhysX-3D — Physical-Grounded 3D Asset Generation** `[G][A][P][F]` 🌐
   3D asset generation and annotation with physical grounding: scale, material, affordance, kinematics, function.
   Links: [project](https://physx-3d.github.io/)
   *Why engineers care:* shifts asset generation from appearance toward physically meaningful metadata.
 
+<a id="sophy"></a>
+
 - **[2026] SOPHY — Generating Simulation-Ready Objects with Physical Materials** `[G][P]` 🧪
   Text/image-conditioned object generation with physical material properties.
   Links: [paper](https://openaccess.thecvf.com/content/WACV2026/html/Cao_SOPHY_Generating_Simulation-Ready_Objects_with_Physical_Materials_WACV_2026_paper.html)
   *Why engineers care:* material parameters are often invisible in images but crucial for contact-rich simulation.
+
+<a id="physdreamer"></a>
 
 - **[2024] PhysDreamer — Physics-Based Interaction with 3D Objects via Video Generation Priors** `[P][V]` 🌐
   Static 3D object → plausible dynamics under interaction using video priors.
@@ -198,6 +214,8 @@ See also: [docs/reading-path.md](docs/reading-path.md).
   Links: [project](https://wolfball.github.io/phycage/)
   *Why engineers care:* simulation-enhanced optimization can enforce physical plausibility during generation.
 
+<a id="dso"></a>
+
 - **[2025] DSO — Aligning 3D Generators with Simulation Feedback for Physical Soundness** `[G][P][V]` 🌐🛠️📦
   Aligns 3D generators so outputs are more stable/self-supporting under simulation feedback.
   Links: [code](https://github.com/RuiningLi/dso) · [project](https://ruiningli.com/dso/)
@@ -206,6 +224,8 @@ See also: [docs/reading-path.md](docs/reading-path.md).
 <a id="datasets"></a>
 
 ## 📦 Datasets and Benchmarks
+
+<a id="sapien-partnet-mobility"></a>
 
 - ⭐ **SAPIEN / PartNet-Mobility** `[G][A][F]` 🌐📦🤖
   Articulated objects, part hierarchy, and mobility annotations in a simulator ecosystem.

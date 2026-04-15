@@ -4,7 +4,7 @@ This repository is primarily a curated documentation/list project. It does not s
 
 ## Reporting a Vulnerability
 
-If you find a security issue related to this repository, please report it privately instead of opening a public issue.
+If you find a security issue related to this repository, please report it privately instead of opening a public issue. Use GitHub private vulnerability reporting if it is available on this repository; otherwise contact the repository owner privately through GitHub.
 
 Good examples:
 
@@ -13,7 +13,7 @@ Good examples:
 - exposed secrets in examples or future scripts,
 - unsafe automation in future validation tooling.
 
-For non-sensitive corrections such as stale links, wrong metadata, or scope issues, use the correction issue template.
+For non-sensitive corrections such as stale links, wrong metadata, or scope issues, use the correction issue template instead of a security report.
 
 ## Supported Versions
 

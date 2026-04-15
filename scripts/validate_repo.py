@@ -51,6 +51,27 @@ def strip_fenced_code(text: str) -> str:
     return "\n".join(output)
 
 
+def slugify_heading(heading: str) -> str:
+    """Approximate GitHub's Markdown heading anchor generation for this repo."""
+    heading = re.sub(r"<[^>]+>", "", heading).strip().lower()
+    heading = re.sub(r"[`*_~]", "", heading)
+    heading = re.sub(r"[^a-z0-9가-힣 _-]", "", heading)
+    heading = re.sub(r"\s+", "-", heading)
+    return heading.strip("-")
+
+
+def anchors_for(path: Path) -> set[str]:
+    text = strip_fenced_code(path.read_text(encoding="utf-8"))
+    anchors = set(re.findall(r"<a\s+id=[\"']([^\"']+)[\"']", text))
+    for line in text.splitlines():
+        match = re.match(r"^(#{1,6})\s+(.+?)\s*$", line)
+        if match:
+            anchor = slugify_heading(match.group(2))
+            if anchor:
+                anchors.add(anchor)
+    return anchors
+
+
 def iter_markdown_files() -> list[Path]:
     return sorted(
         path
@@ -83,15 +104,27 @@ def check_readme(errors: list[str]) -> None:
 
 def check_internal_markdown_links(errors: list[str]) -> None:
     link_pattern = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
+    anchor_cache: dict[Path, set[str]] = {}
     for path in iter_markdown_files():
         text = strip_fenced_code(path.read_text(encoding="utf-8"))
         for match in link_pattern.finditer(text):
             url = match.group(1)
-            if "://" in url or url.startswith("#") or url.startswith("mailto:"):
+            if "://" in url or url.startswith("mailto:"):
                 continue
-            target = url.split("#", 1)[0]
-            if target and not (path.parent / target).exists():
+            target, _, fragment = url.partition("#")
+            target_path = path if not target else path.parent / target
+            if target and not target_path.exists():
                 errors.append(f"{path.relative_to(ROOT)} links to missing file: {url}")
+                continue
+            if fragment:
+                resolved_target_path = target_path.resolve()
+                if resolved_target_path not in anchor_cache:
+                    anchor_cache[resolved_target_path] = anchors_for(resolved_target_path)
+                if fragment not in anchor_cache[resolved_target_path]:
+                    errors.append(
+                        f"{path.relative_to(ROOT)} links to missing anchor #{fragment} in "
+                        f"{resolved_target_path.relative_to(ROOT)}"
+                    )
 
 
 def check_trailing_whitespace(errors: list[str]) -> None:

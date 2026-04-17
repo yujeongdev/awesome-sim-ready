@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Lightweight validation for the awesome-sim-ready repository."""
+"""Lightweight validation for the awesome-real2sim repository."""
 
 from __future__ import annotations
 
@@ -17,19 +17,24 @@ REQUIRED_FILES = [
     "SECURITY.md",
     "docs/asset-qa-checklist.md",
     "docs/reading-path.md",
+    "docs/environment-construction-methods.md",
+    "docs/environment-qa-checklist.md",
 ]
 
 README_REQUIRED_TEXT = [
-    "Awesome Sim-Ready 3D Asset Generation",
+    "Awesome Real2Sim Robotics",
     "Aim of the Project",
-    "What is a Sim-Ready Asset",
+    "What is Real2Sim",
     "Legend",
     "Must Read First",
     "End-to-End Sim-Ready Asset Generation",
     "Articulated Object Generation and Reconstruction",
     "Physics, Materials, and Dynamics Grounding",
+    "Environment Construction and Digital Twins",
+    "Calibration, Domain Gap, and Validation",
+    "Sensor Simulation and Synthetic Data",
     "Datasets and Benchmarks",
-    "Evaluating Sim-Ready Assets",
+    "Evaluating Real2Sim Outputs",
     "Thanks",
 ]
 
@@ -95,9 +100,9 @@ def check_readme(errors: list[str]) -> None:
     for text in FORBIDDEN_README_TEXT:
         if text in readme:
             errors.append(f"README contains removed broad section: {text}")
-    if readme.count("*Why engineers care:*") < 15:
-        errors.append("README should include at least 15 resources with 'Why engineers care' notes")
-    for tag in ["[G]", "[A]", "[P]", "[F]", "[V]"]:
+    if readme.count("*Why engineers care:*") < 20:
+        errors.append("README should include at least 20 resources with 'Why engineers care' notes")
+    for tag in ["[G]", "[A]", "[P]", "[F]", "[E]", "[S]", "[RT]", "[V]"]:
         if tag not in readme:
             errors.append(f"README missing capability tag: {tag}")
 

@@ -1,74 +1,75 @@
 <div align="center">
 
-# 🧰 Awesome Sim-Ready 3D Asset Generation
+# 🌉 Awesome Real2Sim Robotics
 
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 ![Status](https://img.shields.io/badge/status-curated%20MVP-blue)
-![Focus](https://img.shields.io/badge/focus-physical%203D%20assets-8A2BE2)
+![Focus](https://img.shields.io/badge/focus-real2sim%20robotics-8A2BE2)
 ![License](https://img.shields.io/badge/license-CC--BY--4.0-green)
 
-**Curated papers, projects, datasets, and engineering recipes for generating physics-executable 3D assets.**
+**Curated papers, projects, datasets, and engineering recipes for building simulator-executable assets, environments, and digital twins from real-world data.**
 
 </div>
 
 ---
 
+## 🔗 Sibling Project
+
+- [Awesome Sim2Real Learning](https://github.com/yujeongdev/awesome-sim2real-learning) — policy-level transfer: RL/IL, domain randomization, curricula, policy evaluation, and deployment case studies.
+
 ## 🚩 News & Updates
 
+- **2026-04** — Renamed from `awesome-sim-ready` and folded in the environment/digital-twin track from `awesome-sim2real-environments`.
 - **2026-04** — Initial MVP structure: definition, reading path, resource taxonomy, and validation checklist.
 
 ## 📋 Contents
 
 | | Section | What it answers |
-|---|---|---|
-| 🎯 | [Aim of the Project](#aim) | Why this is not another visual 3D paper dump |
-| 🧠 | [What is a Sim-Ready Asset?](#definition) | What must exist beyond a pretty mesh |
+| --- | --- | --- |
+| 🎯 | [Aim of the Project](#aim) | Why Real2Sim is more than pretty reconstruction |
+| 🧠 | [What is Real2Sim?](#definition) | How real observations become simulator-executable state |
 | 🏷️ | [Legend](#legend) | How to read availability and capability tags |
 | 🎚️ | [Selection Criteria](#selection-criteria) | What belongs here and what does not |
 | 🔥 | [Must Read First](#must-read) | A practical reading order |
 | 🧰 | [End-to-End Sim-Ready Asset Generation](#end-to-end) | Image/text/mesh → simulator-facing asset |
 | 🦾 | [Articulated Object Generation and Reconstruction](#articulation) | Parts, joints, axes, limits, kinematic graphs |
 | 🧪 | [Physics, Materials, and Dynamics Grounding](#physics) | Scale, materials, stability, dynamics, simulation feedback |
+| 🌍 | [Environment Construction and Digital Twins](#environment-construction) | Real scenes/tasks → simulator-executable environments |
+| 🎚️ | [Calibration, Domain Gap, and Validation](#calibration-validation) | How sim-real mismatch is measured and reduced |
+| 👁️ | [Sensor Simulation and Synthetic Data](#sensor-simulation) | Cameras, tactile sensors, and observation pipelines |
 | 📦 | [Datasets and Benchmarks](#datasets) | Where supervision and assets come from |
-| ✅ | [Evaluating Sim-Ready Assets](#evaluation) | How to know whether an asset is actually useful |
+| ✅ | [Evaluating Real2Sim Outputs](#evaluation) | How to know whether output is actually useful |
 
 <a id="aim"></a>
 
 ## 🎯 Aim of the Project
 
-Most 3D generation lists focus on visual quality. Robotics and embodied AI teams need a sharper question:
+Real2Sim is the engineering problem of turning real-world evidence into simulation that robots can use.
 
-> Can this asset be imported, articulated, simulated, validated, and reused in a robot-learning pipeline?
+This repo curates work around **simulator-executable representations**: objects, articulated assets, physical parameters, sensor models, task environments, digital twins, and validation methods that help close the loop from real data to simulation and back to real robots.
 
-This repo curates work around **simulation-ready physical 3D assets**: papers, projects, datasets, and tooling that help convert images, text, videos, point clouds, or static meshes into assets with enough structure to run inside physics simulators.
-
-The goal is to be useful to engineers who own real pipelines: Isaac Sim / Isaac Lab, MuJoCo, SAPIEN, PyBullet, Genesis, Gazebo, Omniverse, synthetic data systems, and real2sim workflows.
+The goal is to be useful to engineers who own real pipelines: Isaac Sim / Isaac Lab, MuJoCo, SAPIEN, PyBullet, Genesis, Gazebo, Omniverse, synthetic data systems, digital twins, and real2sim2real workflows.
 
 <a id="definition"></a>
 
-## 🧠 What is a Sim-Ready Asset?
+## 🧠 What is Real2Sim?
 
-A visual 3D asset is mostly geometry and appearance:
-
-```text
-visual 3D asset ≈ geometry + texture
-```
-
-A sim-ready physical asset needs more:
+In this repo, **Real2Sim** means constructing simulator-executable assets, scenes, environments, or digital twins from real-world observations, interactions, demonstrations, or task requirements.
 
 ```text
-sim-ready asset ≈ geometry + articulation + physical properties + simulator format + validation
+real2sim output
+≈ geometry + articulation + physical properties + simulator format
+  + scene/task/sensor context + validation evidence
 ```
 
-In this repo we use the following dimensions:
+Useful Real2Sim output can be small or large:
 
-- **[G] Geometry** — mesh, part meshes, Gaussian/implicit geometry, collision geometry.
-- **[A] Articulation** — part hierarchy, joint type, joint axis, limits, kinematic graph.
-- **[P] Physical properties** — scale, mass, inertia, friction, material, damping, stiffness, stability.
-- **[F] Simulator format** — URDF, MJCF/XML, SDF, USD, simulator-specific assets.
-- **[V] Validation** — evidence that the asset imports, remains stable, moves correctly, and supports tasks.
+- **Object / asset Real2Sim** — image/video/scan/mesh → URDF/MJCF/USD, collision geometry, joints, materials, physics metadata.
+- **Scene / environment Real2Sim** — real capture/task requirement → robot-scene-object-sensor simulation environment.
+- **Digital twin Real2Sim** — synchronized or calibrated simulation that can replay, evaluate, or stress-test real robot behavior.
+- **Real2Sim2Real loop** — real data → sim construction → synthetic rollouts / policy evaluation → real deployment → failure logs → sim update.
 
-Importable is not the same as valid. A URDF that loads but explodes under gravity is only **format-ready**, not **simulation-valid**.
+Importable is not the same as valid. A digital asset or scene that loads but explodes under gravity, lacks calibrated sensors, or fails to reproduce task behavior is only **format-ready**, not **simulation-valid**.
 
 <a id="legend"></a>
 
@@ -88,44 +89,55 @@ Capability tags:
 
 - `[G]` geometry
 - `[A]` articulation
-- `[P]` physical properties
+- `[P]` physical properties / contact / dynamics
 - `[F]` simulator format
+- `[E]` environment / scene
+- `[R]` robot, actuator, embodiment model
+- `[O]` object / asset / material model
+- `[S]` sensor simulation
+- `[DR]` domain randomization / adaptation
+- `[ID]` system identification / calibration
+- `[RT]` Real2Sim / digital twin
+- `[L]` learning environment / RL / IL support
 - `[V]` validation
 
-Why bracket tags instead of emojis here? Availability is human-facing, so emojis work well. Capability tags are intended to be stable, grep-friendly, table-friendly, and easy to migrate into `resources.yml` later. They also avoid ambiguity across platforms where emoji rendering/search can be inconsistent.
-
-Ordering policy: representative and runnable work appears first within a section; newer additions can be added chronologically after the core items.
+Why bracket tags instead of emojis here? Availability is human-facing, so emojis work well. Capability tags are stable, grep-friendly, table-friendly, and easy to migrate into `resources.yml` later.
 
 <a id="selection-criteria"></a>
 
 ## 🎚️ Selection Criteria
 
-This list prioritizes resources that move 3D assets closer to actual simulator use. A strong entry should cover at least one of:
+A strong entry should help construct or validate simulator-executable state from real data. It should contribute to at least one of:
 
-- explicit geometry or part-level output,
-- articulation / kinematic structure,
-- physical or material grounding,
-- simulator-facing formats,
-- validation evidence beyond a rendered demo.
+- explicit geometry, part-level output, or collision representation;
+- articulation / kinematic structure;
+- physical/material/sensor grounding;
+- simulator-facing formats such as URDF, MJCF, SDF, USD, or simulator-native assets;
+- real2sim or digital twin construction;
+- scene, robot, actuator, sensor, or contact calibration;
+- domain randomization or sim-real gap reduction at the environment level;
+- real-world validation, failure replay, or hardware-in-the-loop testing.
 
-Pure visual 3D generation is usually out of scope unless it is a useful building block for sim-ready asset generation.
+Usually out of scope:
 
-Real2Sim work is included only when it produces reusable object-level assets, physical parameters, simulator-facing descriptions, or direct sim-vs-real validation evidence. Scene reconstruction or policy-transfer-only work is out of scope.
+- pure visual 3D reconstruction with no simulator-facing interaction;
+- pure policy-transfer papers better placed in `awesome-sim2real-learning`;
+- simulator demos with no task interface, real-world evidence, or reproducibility path.
 
 <a id="must-read"></a>
 
 ## 🔥 Must Read First
 
-1. **[SAPIEN / PartNet-Mobility](#sapien-partnet-mobility)** — understand the articulated-object dataset and simulator substrate.
+1. **[SAPIEN / PartNet-Mobility](#sapien-partnet-mobility)** — understand articulated-object data and simulator substrate.
 2. **[URDFormer](#urdformer)** — early real-image → URDF digital twin pipeline.
 3. **[Real2Code](#real2code)** — articulation as executable code generation.
-4. **[Articulate-Anything](#articulate-anything)** — VLM agent loop for generating articulated URDF assets.
-5. **[PhysX-3D](#physx-3d)** — physics-grounded asset properties and annotations.
-6. **[PhysX-Anything](#physx-anything)** — single-image simulation-ready physical asset pipeline.
-7. **[SIMART](#simart)** — sparse 3D-token MLLM for decomposing monolithic meshes into sim-ready articulated assets.
-8. **[DSO](#dso) / [SOPHY](#sophy) / [PhysDreamer](#physdreamer)** — physical plausibility, material, and dynamics directions.
+4. **[PhysX-Anything](#physx-anything)** — single-image simulation-ready physical asset pipeline.
+5. **[Re³Sim / RoboGSim / RoboSimGS](#environment-construction)** — real-scene-to-simulation environments.
+6. **[Scalable Real2Sim / Sim2Real²](#environment-construction)** — physics-aware asset and articulated-object real2sim.
+7. **[ComSim / ReaDy-Go](#environment-construction)** — 2026 environment-construction directions.
+8. **[TACTO / GelSight / FOTS](#sensor-simulation)** — sensor simulation as its own real2sim problem.
 
-See also: [docs/reading-path.md](docs/reading-path.md).
+See also: [docs/reading-path.md](docs/reading-path.md) and [docs/environment-construction-methods.md](docs/environment-construction-methods.md).
 
 <a id="end-to-end"></a>
 
@@ -289,39 +301,120 @@ See also: [docs/reading-path.md](docs/reading-path.md).
   Links: [project](https://infinite-mobility.github.io/)
   *Why engineers care:* data scaling path when handcrafted articulated assets are the bottleneck.
 
+<a id="environment-construction"></a>
+
+## 🌍 Environment Construction and Digital Twins
+
+See [docs/environment-construction-methods.md](docs/environment-construction-methods.md) for the deeper landscape.
+
+- ⭐ **[2025] Re³Sim — Generating High-Fidelity Simulation Data via 3D-Photorealistic Real-to-Sim for Robotic Manipulation** `[E][S][RT][L][V]` 🌐📦🤖
+  Real scene capture → 3DGS + Isaac Sim/PhysX reconstruction → simulated expert demonstrations → zero-shot real manipulation transfer.
+  Links: [project](https://xshenhan.github.io/Re3Sim/) · [paper](https://arxiv.org/abs/2502.08645) · [data](https://huggingface.co/datasets/RE3SIM/sim-resources)
+  *Why engineers care:* directly targets the “build a useful sim environment from a real tabletop” problem, not just a new simulator backend.
+  *Caveat:* visual similarity is not a full physics guarantee; scene/object alignment still matters.
+
+- ⭐ **[2024] RoboGSim — Real2Sim2Real Robotic Gaussian Splatting Simulator** `[E][S][P][RT][L][V]` 🌐🤖
+  Real captures → Gaussian reconstruction + digital twin builder + scene composer + interactive engine.
+  Links: [project](https://robogsim.github.io/) · [paper](https://arxiv.org/abs/2411.11839)
+  *Why engineers care:* strong reference for an end-to-end environment-making stack with novel views, objects, trajectories, scenes, and policy evaluation.
+  *Caveat:* inspect where physics is explicit vs visually reconstructed.
+
+- ⭐ **[2025] RoboSimGS — High-Fidelity Simulated Data Generation for Real-World Zero-Shot Robotic Manipulation** `[E][S][RT][L][V]` 🌐🤖
+  Multi-view real images → scalable photoreal and physically interactive manipulation environments.
+  Links: [project](https://robosimgs.github.io/) · [paper](https://arxiv.org/abs/2510.10637)
+  *Why engineers care:* representative of the real-scene-to-training-data pipeline for manipulation.
+  *Caveat:* separate visual, geometric, and contact validation.
+
+- **[2025] Scalable Real2Sim — Physics-Aware Asset Generation via Robotic Pick-and-Place Setups** `[O][P][ID][RT][V]` 🌐🤖
+  Robot interaction + camera → visual geometry, collision geometry, mass and inertial parameters → simulatable object descriptions.
+  Links: [project](https://scalable-real2sim.github.io/) · [paper](https://arxiv.org/abs/2503.00370)
+  *Why engineers care:* adds physical parameter identification to reconstruction, essential for contact dynamics.
+  *Caveat:* object-centric; best treated as a module in larger environment builders.
+
+- **[2026] ReaDy-Go — Real-to-Sim Dynamic 3D Gaussian Splatting Simulation for Environment-Specific Visual Navigation** `[E][S][RT][L][V]` 🌐🤖
+  Reconstructs target scenes with 3DGS and injects animatable human GS obstacles to generate dynamic navigation scenarios.
+  Links: [project](https://syeon-yoo.github.io/ready-go-site/) · [paper](https://arxiv.org/abs/2602.11575)
+  *Why engineers care:* extends real2sim construction from static scenes to dynamic, deployment-specific navigation worlds.
+  *Caveat:* navigation-centered; physical contact fidelity is less central than dynamic-obstacle realism.
+
+- **[2026] ComSim — Building Scalable Real-World Robot Data Generation via Compositional Simulation** `[E][O][S][L][V]` 🌐🤖
+  Hybrid classical + neural simulation for scalable real-world robot data generation.
+  Links: [project](https://faceong.github.io/ComSim/) · [paper](https://arxiv.org/abs/2604.11386)
+  *Why engineers care:* combines simulator action consistency with neural realism rather than hand-authoring every environment.
+  *Caveat:* verify whether neural translation improves behavior-relevant gaps or mainly appearance.
+
+<a id="calibration-validation"></a>
+
+## 🎚️ Calibration, Domain Gap, and Validation
+
+- ⭐ **[2019] SimOpt — Closing the Sim-to-Real Loop by Adapting Simulation Randomization** `[P][DR][ID][V]` 🧪🤖
+  Adapts simulation parameter distributions using a few real-world rollouts interleaved with policy training.
+  Links: [project](https://sites.google.com/view/simopt/home) · [paper](https://arxiv.org/abs/1810.05687)
+  *Why engineers care:* turns randomization into a measured feedback loop instead of hand-tuned noise ranges.
+  *Caveat:* task-specific real rollouts are still needed.
+
+- **[2020] TuneNet — One-Shot Residual Tuning for System Identification and Sim-to-Real Robot Task Transfer** `[P][ID][V]` 🧪🤖
+  Uses iterative residual tuning to adapt simulator/model parameters from limited real-world evidence.
+  Links: [PMLR](https://proceedings.mlr.press/v100/allevato20a.html) · [paper](https://arxiv.org/abs/1907.11200)
+  *Why engineers care:* representative of learning-based physics tuning when manual system identification is too slow.
+  *Caveat:* tuning quality depends on whether chosen parameters can explain the real mismatch.
+
+- ⭐ **[2017] OpenAI Dynamics Randomization — Sim-to-real transfer of robotic control** `[R][P][DR][V]` 🌐🤖
+  Randomizes dynamics parameters during simulated policy training to improve transfer to a real robot.
+  Links: [project](https://openai.com/index/sim-to-real-transfer-of-robotic-control-with-dynamics-randomization)
+  *Why engineers care:* classic baseline for physics randomization as a practical alternative to perfect simulator fidelity.
+  *Caveat:* randomization ranges are engineering decisions; overly broad ranges can hide root causes.
+
+<a id="sensor-simulation"></a>
+
+## 👁️ Sensor Simulation and Synthetic Data
+
+- ⭐ **[2020] TACTO — Fast, Flexible, Open-source Simulator for High-Resolution Vision-based Tactile Sensors** `[S][P][V]` 🧪🛠️🤖
+  Vision-based tactile sensor simulator with sim2real proof-of-concept.
+  Links: [paper](https://arxiv.org/abs/2012.08456) · [code](https://github.com/facebookresearch/tacto)
+  *Why engineers care:* tactile sensing has its own sim-real gap; RGB/depth simulation assumptions rarely transfer directly.
+  *Caveat:* realism depends on contact, illumination, gel deformation, and sensor-specific calibration.
+
+- **[2021] GelSight Simulation for Sim2Real Learning** `[S][DR][V]` 🌐🤖
+  Gazebo-based simulation pipeline for generating GelSight tactile images and studying tactile sim2real transfer.
+  Links: [project](https://danfergo.github.io/gelsight-simulation/) · [paper](https://arxiv.org/abs/2101.07169)
+  *Why engineers care:* useful example of measuring sensor-domain mismatch and using augmentation to reduce it.
+  *Caveat:* sensor morphology and fabrication artifacts matter.
+
 <a id="evaluation"></a>
 
-## ✅ Evaluating Sim-Ready Assets
+## ✅ Evaluating Real2Sim Outputs
 
-See [docs/asset-qa-checklist.md](docs/asset-qa-checklist.md).
+See [docs/asset-qa-checklist.md](docs/asset-qa-checklist.md) and [docs/environment-qa-checklist.md](docs/environment-qa-checklist.md).
 
 A practical validation ladder:
 
-1. **Visual asset** — looks plausible.
-2. **Importable asset** — parses in the claimed simulator.
-3. **Kinematically usable asset** — joints, axes, limits, and frames work.
-4. **Physically stable asset** — mass/inertia/collision/materials do not explode under gravity/contact.
-5. **Task-useful asset** — planners or policies can interact with it repeatably.
+1. **Visual reconstruction** — looks plausible.
+2. **Importable representation** — parses in the claimed simulator.
+3. **Interactable representation** — joints, contacts, sensors, and controllers work under scripted actions.
+4. **Physically stable representation** — mass/inertia/collision/materials do not explode under gravity/contact.
+5. **Task-predictive representation** — simulation predicts real failures, rankings, or success rates.
 
-Quick questions for every generated asset:
+Quick questions for every Real2Sim output:
 
 - Does it import into the claimed simulator?
 - Are mesh paths, scales, origins, and frames correct?
-- Do joints move without immediate interpenetration?
-- Are collision meshes simpler than visual meshes?
-- Is mass/inertia/friction/damping explicit or guessed?
-- Was stability tested under gravity and contact?
-- Is it useful for policy learning, or only a demo render?
+- Do joints and contacts behave without immediate interpenetration?
+- Are collision meshes simpler and more stable than visual meshes?
+- Is mass/inertia/friction/damping explicit, measured, or guessed?
+- Are sensors calibrated or just rendered?
+- Does validation compare behavior, or only rendered appearance?
+- Is it useful for policy learning, evaluation, replay, or deployment?
 
 ## 🤝 Contributing
 
-Contributions are welcome, but the bar is intentionally higher than “related to 3D.” See [CONTRIBUTING.md](CONTRIBUTING.md).
+Contributions are welcome, but the bar is intentionally higher than “related to 3D” or “related to simulation.” See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 A good entry explains:
 
-- what input it consumes,
+- what real-world input it consumes,
 - what simulator-facing output it produces,
-- which sim-ready dimensions it covers,
+- which Real2Sim dimensions it covers,
 - whether code/data/checkpoints are available,
 - and what still needs validation.
 
@@ -334,9 +427,9 @@ Format inspiration from [Awesome World Models](https://github.com/knightnemo/Awe
 If this list helps your work, cite the repository URL for now:
 
 ```bibtex
-@misc{awesome_sim_ready_asset_generation,
-  title        = {Awesome Sim-Ready 3D Asset Generation},
-  howpublished = {\url{https://github.com/techhouse-looper/awesome-sim-ready}},
+@misc{awesome_real2sim_robotics,
+  title        = {Awesome Real2Sim Robotics},
+  howpublished = {\url{https://github.com/yujeongdev/awesome-real2sim}},
   year         = {2026}
 }
 ```

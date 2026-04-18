@@ -208,6 +208,12 @@ See also: [docs/reading-path.md](docs/reading-path.md) and [docs/environment-con
   Links: [paper](https://arxiv.org/abs/2507.05763)
   *Why engineers care:* combines single-view object generation with articulation priors and motion optimization.
 
+- **[2026] AniGen — Unified S3 Fields for Animatable 3D Asset Generation** `[G][A][F]` 🌐🧪
+  Single image → animatable 3D asset with co-generated geometry, skeleton, and skinning weights across animals, humanoids, and machinery.
+  Links: [project](https://yihua7.github.io/AniGen_web/) · [paper](https://yihua7.github.io/AniGen_web/assets/pdf/AniGen.pdf)
+  *Why engineers care:* unusually relevant for simulator-facing articulated assets because it predicts not just part structure but full animation scaffolding, which is a useful precursor to articulation-aware USD/URDF pipelines and embodied-agent-ready asset creation.
+  *Caveat:* animation-ready rigging is not automatically simulator-valid articulation; joint semantics, limits, collision geometry, and dynamics metadata still need downstream Real2Sim lowering and QA.
+
 - **[2026] PAct — Part-Decomposed Single-View Articulated Object Generation** `[G][A]` 🧪
   Single image → part-decomposed articulated 3D asset.
   Links: [paper](https://arxiv.org/abs/2602.14965)

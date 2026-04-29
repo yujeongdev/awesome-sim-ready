@@ -349,6 +349,12 @@ See [docs/environment-construction-methods.md](docs/environment-construction-met
   *Why engineers care:* combines simulator action consistency with neural realism rather than hand-authoring every environment.
   *Caveat:* verify whether neural translation improves behavior-relevant gaps or mainly appearance.
 
+- **[2026] MATTERIX — Towards a Digital Twin for Robotics-Assisted Chemistry Lab Automation** `[E][S][P][RT][L][V]` 🧪
+  Multi-scale GPU-accelerated chemistry-lab digital twin spanning robot manipulation, powder and liquid dynamics, device functionality, heat transfer, and basic reaction kinetics, with hierarchical workflow design and sim-to-real evidence.
+  Links: [paper](https://arxiv.org/abs/2601.13232)
+  *Why engineers care:* strong domain-specific example of Real2Sim as a usable digital-twin stack rather than just 3D reconstruction; especially relevant when environments must model process dynamics, instruments, and workflow semantics in addition to geometry.
+  *Caveat:* chemistry-lab specificity is a strength and a limit; the key question is which semantics/physics layers transfer cleanly to general robot-manipulation environments.
+
 - **[2026] RoboLab — A High-Fidelity Simulation Benchmark for Analysis of Task Generalist Policies** `[E][R][O][S][L][V]` 🌐🛠️📦🤖🧾
   Scene/task descriptions → Isaac Lab task libraries and runnable robot-agnostic policy-evaluation environments.
   Links: [project](https://research.nvidia.com/labs/srl/projects/robolab/) · [paper](https://arxiv.org/abs/2604.09860) · [code](https://github.com/NVLabs/RoboLab)

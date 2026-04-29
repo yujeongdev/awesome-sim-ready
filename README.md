@@ -163,6 +163,12 @@ See also: [docs/reading-path.md](docs/reading-path.md) and [docs/environment-con
   Links: [code](https://github.com/HorizonRobotics/EmbodiedGen) · [project](https://horizonrobotics.github.io/EmbodiedGen/)
   *Why engineers care:* useful reference for packaging generated assets across multiple simulators.
 
+- **[2026] Asset Harvester — Extracting 3D Assets from Autonomous Driving Logs for Simulation** `[G][O][F][RT][V]` 🌐🛠️
+  Sparse, in-the-wild object observations from autonomous-driving logs → complete reusable 3D assets for closed-loop AV simulation, with sparse-view multiview generation, 3D Gaussian lifting, and reinsertion into reconstructed scenes.
+  Links: [paper](https://arxiv.org/abs/2604.18468) · [code](https://github.com/nvidia/asset-harvester/) · [project](https://research.nvidia.com/labs/sil/projects/asset-harvester/)
+  *Why engineers care:* directly targets a real production bottleneck for closed-loop simulation: neural scene reconstruction alone cannot support object replacement, manipulation, or novel ego trajectories unless observed agents become complete reusable assets.
+  *Caveat:* primarily geometry/appearance asset completion for AV simulation; treat physical behavior, articulation, and simulator-specific interaction fidelity as downstream validation work.
+
 <a id="articulation"></a>
 
 ## 🦾 Articulated Object Generation and Reconstruction

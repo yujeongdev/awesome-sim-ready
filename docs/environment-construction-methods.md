@@ -176,6 +176,33 @@ should I use?” to “how do I construct the environment instance?” Current t
   physically stable clutter.
   *Caveat:* very recent; verify code/data and simulator integration when public.
 
+- **[2026] MATTERIX — Towards a Digital Twin for Robotics-Assisted Chemistry
+  Lab Automation** `[E][S][P][RT][L][V]`
+  Multi-scale chemistry-lab digital twin covering robot manipulation, powder
+  and liquid dynamics, device functionality, heat transfer, and basic reaction
+  kinetics, with hierarchical workflow definitions and sim-to-real evidence.
+  Links: [paper](https://arxiv.org/abs/2601.13232)
+  *Why engineers care:* a good reminder that environment construction is not
+  only geometry plus rendering; some domains require explicit process semantics,
+  instrument logic, and non-rigid material dynamics for the twin to be useful.
+  *Caveat:* highly domain-specific; useful as a digital-twin systems reference
+  even when its chemistry abstractions do not transfer directly.
+
+### Upstream perception and reconstruction precursors
+
+- **[2026] Reconstruction by Generation — 3D Multi-Object Scene Reconstruction
+  from Sparse Observations** `[E][O]`
+  Sparse RGB-D observations → probabilistic joint estimation of object/part
+  shape and pose in cluttered, occluded scenes. Links:
+  [project](https://reconstruction-by-generation.github.io/) ·
+  [paper](https://reconstruction-by-generation.github.io/recgen.pdf)
+  *Why engineers care:* relevant upstream to environment construction because
+  occlusion-robust object/part recovery is often the bottleneck before any
+  simulator lowering, calibration, or task composition can happen.
+  *Caveat:* keep it out of the main curated list unless/until the pipeline shows
+  clearer simulator-facing outputs, physical grounding, or direct interactive
+  digital-twin validation.
+
 ### Task and environment generation
 
 - ⭐ **[2024] GenSim — Generating Robotic Simulation Tasks via Large Language Models**

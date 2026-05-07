@@ -57,6 +57,8 @@ Move from objects to worlds:
 - DISCOVERSE
 - ReaDy-Go
 - ComSim
+- High-Fidelity Digital Twin for Robotic Manipulation (3DGS)
+- SyncTwin
 
 Questions to ask:
 
@@ -69,7 +71,7 @@ Questions to ask:
 Interaction often reveals physical parameters that passive scanning cannot.
 
 - Sim2Real²
-- Real2Sim with VLM-generated behavior trees
+- Real2Sim based on Active Perception with automatically VLM-generated Behavior Trees
 - Physics-consistent cluttered Real2Sim
 - TwinTrack-style vision + contact physics systems
 

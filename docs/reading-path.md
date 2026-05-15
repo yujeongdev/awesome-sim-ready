@@ -72,6 +72,7 @@ Interaction often reveals physical parameters that passive scanning cannot.
 
 - Sim2Real²
 - Real2Sim based on Active Perception with automatically VLM-generated Behavior Trees
+- ManiDreams
 - Physics-consistent cluttered Real2Sim
 - TwinTrack-style vision + contact physics systems
 
@@ -79,6 +80,7 @@ Questions to ask:
 
 - Does the robot actively acquire task-relevant parameters?
 - Are support relations and contact graphs modeled?
+- How is perceptual, parametric, or structural uncertainty represented and propagated into planning?
 - Is differentiable or repeated simulation used to make the scene physically stable?
 
 ## 5. Study Sensor Real2Sim

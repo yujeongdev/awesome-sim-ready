@@ -397,6 +397,12 @@ See [docs/environment-construction-methods.md](docs/environment-construction-met
   Links: [paper](https://arxiv.org/abs/2601.08454)
   *Why engineers care:* representative of task-driven system identification, where active interaction reduces ambiguity that passive observation cannot resolve.
 
+- **[2026] ManiDreams — An Open-Source Library for Robust Object Manipulation via Uncertainty-aware Task-specific Intuitive Physics** `[P][ID][V]` 🧪🛠️🤖
+  Wraps simulator or learned dynamics backends in a distributional planning loop that propagates perceptual, parametric, and structural uncertainty during manipulation.
+  Links: [paper](https://arxiv.org/abs/2603.18336) · [code](https://github.com/Rice-RobotPI-Lab/ManiDreams)
+  *Why engineers care:* useful reference for turning Real2Sim uncertainty into action-time robustness checks instead of treating model mismatch as a training-only concern.
+  *Caveat:* primarily a manipulation-planning and validation layer, not a direct pipeline for constructing sim-ready assets or scenes from raw real data.
+
 - ⭐ **[2017] OpenAI Dynamics Randomization — Sim-to-real transfer of robotic control** `[R][P][DR][V]` 🌐🤖
   Randomizes dynamics parameters during simulated policy training to improve transfer to a real robot.
   Links: [project](https://openai.com/index/sim-to-real-transfer-of-robotic-control-with-dynamics-randomization)

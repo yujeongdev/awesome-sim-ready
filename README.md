@@ -187,6 +187,11 @@ See also: [docs/reading-path.md](docs/reading-path.md) and [docs/environment-con
   Links: [project](https://real2code.github.io/)
   *Why engineers care:* shows how LLM/code representations can carry articulation structure better than raw continuous predictions alone.
 
+- **[2026] URDF-Anything+ — Autoregressive Generation of Physical Simulation-Ready Articulated Objects from Single Views** `[G][A][P][F][V]` 🌐🧪
+  Single-view observation → articulated object geometry/kinematics with simulation-ready structure for physics execution.
+  Links: [paper](https://arxiv.org/abs/2603.14010)
+  *Why engineers care:* strong 2026 reference for moving from visual articulation prediction to executable, physics-usable articulated assets.
+
 <a id="urdformer"></a>
 
 - **[2023/2024] URDFormer — Constructing Articulated Simulation Environments from Real-World Images** `[G][A][F]` 🌐🛠️
@@ -349,6 +354,16 @@ See [docs/environment-construction-methods.md](docs/environment-construction-met
   *Why engineers care:* combines simulator action consistency with neural realism rather than hand-authoring every environment.
   *Caveat:* verify whether neural translation improves behavior-relevant gaps or mainly appearance.
 
+- **[2026] A High-Fidelity Digital Twin for Robotic Manipulation Based on 3D Gaussian Splatting** `[E][S][RT][V]` 🧪
+  Real captures → high-fidelity 3DGS-based digital twin for manipulation-centric simulation and evaluation.
+  Links: [paper](https://arxiv.org/abs/2601.03200)
+  *Why engineers care:* adds a direct reference point for high-fidelity manipulation twins when visual realism and synchronization quality are both critical.
+
+- **[2026] SyncTwin — Fast Digital Twin Construction and Synchronization for Safe Robotic Grasping** `[E][S][RT][ID][V]` 🧪
+  Fast twin construction plus synchronization in dynamic/occluded settings for safer grasp planning and execution.
+  Links: [paper](https://arxiv.org/abs/2601.09920)
+  *Why engineers care:* emphasizes twin *synchronization* (not just one-shot reconstruction), which is essential for operational real2sim2real loops.
+
 - **[2026] MATTERIX — Towards a Digital Twin for Robotics-Assisted Chemistry Lab Automation** `[E][S][P][RT][L][V]` 🧪
   Multi-scale GPU-accelerated chemistry-lab digital twin spanning robot manipulation, powder and liquid dynamics, device functionality, heat transfer, and basic reaction kinetics, with hierarchical workflow design and sim-to-real evidence.
   Links: [paper](https://arxiv.org/abs/2601.13232)
@@ -376,6 +391,17 @@ See [docs/environment-construction-methods.md](docs/environment-construction-met
   Links: [PMLR](https://proceedings.mlr.press/v100/allevato20a.html) · [paper](https://arxiv.org/abs/1907.11200)
   *Why engineers care:* representative of learning-based physics tuning when manual system identification is too slow.
   *Caveat:* tuning quality depends on whether chosen parameters can explain the real mismatch.
+
+- **[2026] Real2Sim based on Active Perception with automatically VLM-generated Behavior Trees** `[E][P][ID][RT][V]` 🧪
+  Uses VLM-generated behavior trees to actively collect task-relevant evidence and infer physical parameters for real2sim construction.
+  Links: [paper](https://arxiv.org/abs/2601.08454)
+  *Why engineers care:* representative of task-driven system identification, where active interaction reduces ambiguity that passive observation cannot resolve.
+
+- **[2026] ManiDreams — An Open-Source Library for Robust Object Manipulation via Uncertainty-aware Task-specific Intuitive Physics** `[P][ID][V]` 🧪🛠️🤖
+  Wraps simulator or learned dynamics backends in a distributional planning loop that propagates perceptual, parametric, and structural uncertainty during manipulation.
+  Links: [paper](https://arxiv.org/abs/2603.18336) · [code](https://github.com/Rice-RobotPI-Lab/ManiDreams)
+  *Why engineers care:* useful reference for turning Real2Sim uncertainty into action-time robustness checks instead of treating model mismatch as a training-only concern.
+  *Caveat:* primarily a manipulation-planning and validation layer, not a direct pipeline for constructing sim-ready assets or scenes from raw real data.
 
 - ⭐ **[2017] OpenAI Dynamics Randomization — Sim-to-real transfer of robotic control** `[R][P][DR][V]` 🌐🤖
   Randomizes dynamics parameters during simulated policy training to improve transfer to a real robot.
